@@ -1,0 +1,22 @@
+{
+    "full_name": "Charan M",
+    "name": "Chiru",
+    "current_role": "Graduate",
+    "location": "Bengaluru",
+    "email": "charangowda946@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/charan-m-3829933ab/",
+    "specialties": [
+        "Machine Learning",
+        "AI",
+        "Generative AI",
+        "Automation"
+    ],
+    "years_experience": 1,
+    "education": [
+        {
+            "degree": "Application in Computer Science",
+            "institution": "St. Francis College",
+            "year": "2026"
+        }
+    ]
+}
