@@ -36,6 +36,15 @@ if ! aws s3api head-bucket --bucket "$STATE_BUCKET" 2>/dev/null; then
   aws s3api put-bucket-versioning --bucket "$STATE_BUCKET" --versioning-configuration Status=Enabled
 fi
 
+# Clear any stale DynamoDB checksum / lock if state object does not exist in S3
+WORKSPACE_KEY="env:/${ENVIRONMENT}/${ENVIRONMENT}/terraform.tfstate"
+if ! aws s3api head-object --bucket "$STATE_BUCKET" --key "$WORKSPACE_KEY" 2>/dev/null; then
+  aws dynamodb delete-item --table-name "$LOCKS_TABLE" \
+    --key "{\"LockID\": {\"S\": \"${STATE_BUCKET}/${WORKSPACE_KEY}-md5\"}}" 2>/dev/null || true
+  aws dynamodb delete-item --table-name "$LOCKS_TABLE" \
+    --key "{\"LockID\": {\"S\": \"${STATE_BUCKET}/${ENVIRONMENT}/terraform.tfstate-md5\"}}" 2>/dev/null || true
+fi
+
 # Initialize terraform with S3 backend
 echo "🔧 Initializing Terraform with S3 backend..."
 terraform init -input=false \

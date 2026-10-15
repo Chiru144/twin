@@ -51,6 +51,16 @@ if ! aws dynamodb describe-table --table-name "$LOCKS_TABLE" --region "$AWS_REGI
   echo "✅ DynamoDB lock table created."
 fi
 
+# Clear any stale DynamoDB checksum / lock if state object does not exist in S3
+WORKSPACE_KEY="env:/${ENVIRONMENT}/${ENVIRONMENT}/terraform.tfstate"
+if ! aws s3api head-object --bucket "$STATE_BUCKET" --key "$WORKSPACE_KEY" 2>/dev/null; then
+  echo "🧹 State file $WORKSPACE_KEY not found in S3. Clearing any stale lock entries in DynamoDB..."
+  aws dynamodb delete-item --table-name "$LOCKS_TABLE" \
+    --key "{\"LockID\": {\"S\": \"${STATE_BUCKET}/${WORKSPACE_KEY}-md5\"}}" 2>/dev/null || true
+  aws dynamodb delete-item --table-name "$LOCKS_TABLE" \
+    --key "{\"LockID\": {\"S\": \"${STATE_BUCKET}/${ENVIRONMENT}/terraform.tfstate-md5\"}}" 2>/dev/null || true
+fi
+
 terraform init -input=false \
   -backend-config="bucket=${STATE_BUCKET}" \
   -backend-config="key=${ENVIRONMENT}/terraform.tfstate" \
