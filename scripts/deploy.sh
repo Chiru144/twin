@@ -15,11 +15,47 @@ echo "📦 Building Lambda package..."
 cd terraform
 AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
 AWS_REGION=${DEFAULT_AWS_REGION:-us-east-1}
+STATE_BUCKET="twin-terraform-state-${AWS_ACCOUNT_ID}"
+LOCKS_TABLE="twin-terraform-locks"
+
+# Ensure S3 state bucket exists (use if exists, create if not)
+echo "🔍 Checking S3 state bucket: $STATE_BUCKET..."
+if ! aws s3api head-bucket --bucket "$STATE_BUCKET" 2>/dev/null; then
+  echo "🪣 State bucket $STATE_BUCKET not found. Creating a new one..."
+  if [ "$AWS_REGION" = "us-east-1" ]; then
+    aws s3api create-bucket --bucket "$STATE_BUCKET" --region "$AWS_REGION"
+  else
+    aws s3api create-bucket --bucket "$STATE_BUCKET" --region "$AWS_REGION" \
+      --create-bucket-configuration LocationConstraint="$AWS_REGION"
+  fi
+  aws s3api put-bucket-versioning --bucket "$STATE_BUCKET" --versioning-configuration Status=Enabled
+  aws s3api put-bucket-encryption --bucket "$STATE_BUCKET" \
+    --server-side-encryption-configuration '{"Rules": [{"ApplyServerSideEncryptionByDefault": {"SSEAlgorithm": "AES256"}}]}'
+  aws s3api put-public-access-block --bucket "$STATE_BUCKET" \
+    --public-access-block-configuration BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true
+  echo "✅ S3 state bucket created."
+else
+  echo "✅ S3 state bucket $STATE_BUCKET exists. Using it."
+fi
+
+# Ensure DynamoDB locks table exists (use if exists, create if not)
+if ! aws dynamodb describe-table --table-name "$LOCKS_TABLE" --region "$AWS_REGION" 2>/dev/null; then
+  echo "🔒 Creating DynamoDB table for Terraform locking: $LOCKS_TABLE..."
+  aws dynamodb create-table \
+    --table-name "$LOCKS_TABLE" \
+    --attribute-definitions AttributeName=LockID,AttributeType=S \
+    --key-schema AttributeName=LockID,KeyType=HASH \
+    --billing-mode PAY_PER_REQUEST \
+    --region "$AWS_REGION"
+  aws dynamodb wait table-exists --table-name "$LOCKS_TABLE" --region "$AWS_REGION"
+  echo "✅ DynamoDB lock table created."
+fi
+
 terraform init -input=false \
-  -backend-config="bucket=twin-terraform-state-${AWS_ACCOUNT_ID}" \
+  -backend-config="bucket=${STATE_BUCKET}" \
   -backend-config="key=${ENVIRONMENT}/terraform.tfstate" \
   -backend-config="region=${AWS_REGION}" \
-  -backend-config="dynamodb_table=twin-terraform-locks" \
+  -backend-config="dynamodb_table=${LOCKS_TABLE}" \
   -backend-config="encrypt=true"
 
 if ! terraform workspace list | grep -q "$ENVIRONMENT"; then

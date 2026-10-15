@@ -21,14 +21,28 @@ cd "$(dirname "$0")/../terraform"
 # Get AWS Account ID and Region for backend configuration
 AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
 AWS_REGION=${DEFAULT_AWS_REGION:-us-east-1}
+STATE_BUCKET="twin-terraform-state-${AWS_ACCOUNT_ID}"
+LOCKS_TABLE="twin-terraform-locks"
+
+# S3 State Bucket: use existing if it exists, otherwise create it
+if ! aws s3api head-bucket --bucket "$STATE_BUCKET" 2>/dev/null; then
+  echo "🪣 State bucket $STATE_BUCKET not found. Creating bucket..."
+  if [ "$AWS_REGION" = "us-east-1" ]; then
+    aws s3api create-bucket --bucket "$STATE_BUCKET" --region "$AWS_REGION"
+  else
+    aws s3api create-bucket --bucket "$STATE_BUCKET" --region "$AWS_REGION" \
+      --create-bucket-configuration LocationConstraint="$AWS_REGION"
+  fi
+  aws s3api put-bucket-versioning --bucket "$STATE_BUCKET" --versioning-configuration Status=Enabled
+fi
 
 # Initialize terraform with S3 backend
 echo "🔧 Initializing Terraform with S3 backend..."
 terraform init -input=false \
-  -backend-config="bucket=twin-terraform-state-${AWS_ACCOUNT_ID}" \
+  -backend-config="bucket=${STATE_BUCKET}" \
   -backend-config="key=${ENVIRONMENT}/terraform.tfstate" \
   -backend-config="region=${AWS_REGION}" \
-  -backend-config="dynamodb_table=twin-terraform-locks" \
+  -backend-config="dynamodb_table=${LOCKS_TABLE}" \
   -backend-config="encrypt=true"
 
 # Check if workspace exists
