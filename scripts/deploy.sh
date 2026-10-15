@@ -74,6 +74,47 @@ else
   terraform workspace select "$ENVIRONMENT"
 fi
 
+# Clean up any orphaned AWS resources not tracked in Terraform state (prevents EntityAlreadyExists errors)
+echo "🔍 Checking for untracked AWS resources that might conflict..."
+
+# 1. IAM Role
+if ! terraform state list 2>/dev/null | grep -q "aws_iam_role.lambda_role"; then
+  ROLE_NAME="${PROJECT_NAME}-${ENVIRONMENT}-lambda-role"
+  if aws iam get-role --role-name "$ROLE_NAME" 2>/dev/null; then
+    echo "⚠️ Found untracked IAM role $ROLE_NAME. Cleaning it up..."
+    for policy in $(aws iam list-attached-role-policies --role-name "$ROLE_NAME" --query "AttachedPolicies[].PolicyArn" --output text 2>/dev/null); do
+      aws iam detach-role-policy --role-name "$ROLE_NAME" --policy-arn "$policy" 2>/dev/null || true
+    done
+    for inline in $(aws iam list-role-policies --role-name "$ROLE_NAME" --query "PolicyNames[]" --output text 2>/dev/null); do
+      aws iam delete-role-policy --role-name "$ROLE_NAME" --policy-name "$inline" 2>/dev/null || true
+    done
+    aws iam delete-role --role-name "$ROLE_NAME" 2>/dev/null || true
+    echo "✅ Removed untracked IAM role $ROLE_NAME"
+  fi
+fi
+
+# 2. API Gateway
+if ! terraform state list 2>/dev/null | grep -q "aws_apigatewayv2_api.main"; then
+  API_NAME="${PROJECT_NAME}-${ENVIRONMENT}-api-gateway"
+  for api_id in $(aws apigatewayv2 get-apis --query "Items[?Name=='$API_NAME'].ApiId" --output text 2>/dev/null); do
+    if [ -n "$api_id" ] && [ "$api_id" != "None" ]; then
+      echo "⚠️ Found untracked API Gateway $API_NAME ($api_id). Deleting..."
+      aws apigatewayv2 delete-api --api-id "$api_id" 2>/dev/null || true
+      echo "✅ Deleted API Gateway $api_id"
+    fi
+  done
+fi
+
+# 3. Lambda Function
+if ! terraform state list 2>/dev/null | grep -q "aws_lambda_function.api"; then
+  FN_NAME="${PROJECT_NAME}-${ENVIRONMENT}-api"
+  if aws lambda get-function --function-name "$FN_NAME" 2>/dev/null; then
+    echo "⚠️ Found untracked Lambda function $FN_NAME. Deleting..."
+    aws lambda delete-function --function-name "$FN_NAME" 2>/dev/null || true
+    echo "✅ Deleted Lambda function $FN_NAME"
+  fi
+fi
+
 # Use prod.tfvars for production environment
 if [ "$ENVIRONMENT" = "prod" ]; then
   TF_APPLY_CMD=(terraform apply -var-file=prod.tfvars -var="project_name=$PROJECT_NAME" -var="environment=$ENVIRONMENT" -auto-approve)
