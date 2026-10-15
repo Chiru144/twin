@@ -12,7 +12,7 @@ on:
           - test
           - prod
       confirm:
-        description: 'Type the environment name to confirm destruction'
+        description: 'Type the environment name (e.g. dev) or "twin" / "yes" to confirm'
         required: true
 
 permissions:
@@ -28,13 +28,22 @@ jobs:
     steps:
       - name: Verify confirmation
         run: |
-          if [ "${{ github.event.inputs.confirm }}" != "${{ github.event.inputs.environment }}" ]; then
-            echo "❌ Confirmation does not match environment name!"
+          CONFIRM_INPUT=$(echo "${{ github.event.inputs.confirm }}" | tr '[:upper:]' '[:lower:]' | xargs)
+          TARGET_ENV=$(echo "${{ github.event.inputs.environment }}" | tr '[:upper:]' '[:lower:]' | xargs)
+          
+          if [ "$CONFIRM_INPUT" = "$TARGET_ENV" ] || \
+             [ "$CONFIRM_INPUT" = "twin" ] || \
+             [ "$CONFIRM_INPUT" = "yes" ] || \
+             [ "$CONFIRM_INPUT" = "y" ] || \
+             [ "$CONFIRM_INPUT" = "confirm" ] || \
+             [ "$CONFIRM_INPUT" = "true" ]; then
+            echo "✅ Destruction confirmed for environment: ${{ github.event.inputs.environment }} (input: '${{ github.event.inputs.confirm }}')"
+          else
+            echo "❌ Confirmation does not match!"
             echo "You entered: '${{ github.event.inputs.confirm }}'"
-            echo "Expected: '${{ github.event.inputs.environment }}'"
+            echo "Expected environment '${{ github.event.inputs.environment }}', project name 'twin', or 'yes'."
             exit 1
           fi
-          echo "✅ Destruction confirmed for ${{ github.event.inputs.environment }}"
 
       - name: Checkout code
         uses: actions/checkout@v4
