@@ -47,6 +47,7 @@ echo "📦 Emptying S3 buckets..."
 # Get bucket names with account ID (matching Day 4 naming)
 FRONTEND_BUCKET="${PROJECT_NAME}-${ENVIRONMENT}-frontend-${AWS_ACCOUNT_ID}"
 MEMORY_BUCKET="${PROJECT_NAME}-${ENVIRONMENT}-memory-${AWS_ACCOUNT_ID}"
+DEPLOYMENTS_BUCKET="${PROJECT_NAME}-${ENVIRONMENT}-deployments-${AWS_ACCOUNT_ID}"
 
 # Empty frontend bucket if it exists
 if aws s3 ls "s3://$FRONTEND_BUCKET" 2>/dev/null; then
@@ -62,6 +63,14 @@ if aws s3 ls "s3://$MEMORY_BUCKET" 2>/dev/null; then
     aws s3 rm "s3://$MEMORY_BUCKET" --recursive
 else
     echo "  Memory bucket not found or already empty"
+fi
+
+# Empty deployments bucket if it exists
+if aws s3 ls "s3://$DEPLOYMENTS_BUCKET" 2>/dev/null; then
+    echo "  Emptying $DEPLOYMENTS_BUCKET..."
+    aws s3 rm "s3://$DEPLOYMENTS_BUCKET" --recursive
+else
+    echo "  Deployments bucket not found or already empty"
 fi
 
 echo "🔥 Running terraform destroy..."

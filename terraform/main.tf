@@ -85,6 +85,30 @@ resource "aws_s3_bucket_policy" "frontend" {
   depends_on = [aws_s3_bucket_public_access_block.frontend]
 }
 
+# S3 bucket for Lambda deployment packages
+resource "aws_s3_bucket" "deployments" {
+  bucket        = "${local.name_prefix}-deployments-${data.aws_caller_identity.current.account_id}"
+  force_destroy = true
+  tags          = local.common_tags
+}
+
+resource "aws_s3_bucket_public_access_block" "deployments" {
+  bucket = aws_s3_bucket.deployments.id
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
+resource "aws_s3_bucket_ownership_controls" "deployments" {
+  bucket = aws_s3_bucket.deployments.id
+
+  rule {
+    object_ownership = "BucketOwnerEnforced"
+  }
+}
+
 # IAM role for Lambda
 resource "aws_iam_role" "lambda_role" {
   name = "${local.name_prefix}-lambda-role"
@@ -119,17 +143,29 @@ resource "aws_iam_role_policy_attachment" "lambda_s3" {
   role       = aws_iam_role.lambda_role.name
 }
 
+# Upload Lambda package to S3
+resource "aws_s3_object" "lambda_package" {
+  bucket = aws_s3_bucket.deployments.id
+  key    = "builds/${local.name_prefix}-api-${filemd5("${path.module}/../backend/lambda-deployment.zip")}.zip"
+  source = "${path.module}/../backend/lambda-deployment.zip"
+  etag   = filemd5("${path.module}/../backend/lambda-deployment.zip")
+  tags   = local.common_tags
+}
+
 # Lambda function
 resource "aws_lambda_function" "api" {
-  filename         = "${path.module}/../backend/lambda-deployment.zip"
-  function_name    = "${local.name_prefix}-api"
-  role             = aws_iam_role.lambda_role.arn
-  handler          = "lambda_handler.handler"
+  function_name = "${local.name_prefix}-api"
+  role          = aws_iam_role.lambda_role.arn
+  handler       = "lambda_handler.handler"
+  runtime       = "python3.12"
+  architectures = ["x86_64"]
+  timeout       = var.lambda_timeout
+  tags          = local.common_tags
+
+  # S3 deployment package references to avoid request buffer overflow on large packages
+  s3_bucket        = aws_s3_object.lambda_package.bucket
+  s3_key           = aws_s3_object.lambda_package.key
   source_code_hash = filebase64sha256("${path.module}/../backend/lambda-deployment.zip")
-  runtime          = "python3.12"
-  architectures    = ["x86_64"]
-  timeout          = var.lambda_timeout
-  tags             = local.common_tags
 
   environment {
     variables = {
@@ -208,7 +244,7 @@ resource "aws_lambda_permission" "api_gw" {
 # CloudFront distribution
 resource "aws_cloudfront_distribution" "main" {
   aliases = local.aliases
-  
+
   viewer_certificate {
     acm_certificate_arn            = var.use_custom_domain ? aws_acm_certificate.site[0].arn : null
     cloudfront_default_certificate = var.use_custom_domain ? false : true

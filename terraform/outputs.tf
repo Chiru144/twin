@@ -18,6 +18,11 @@ output "s3_memory_bucket" {
   value       = aws_s3_bucket.memory.id
 }
 
+output "s3_deployments_bucket" {
+  description = "Name of the S3 bucket for deployment packages"
+  value       = aws_s3_bucket.deployments.id
+}
+
 output "lambda_function_name" {
   description = "Name of the Lambda function"
   value       = aws_lambda_function.api.function_name
