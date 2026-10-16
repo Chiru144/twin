@@ -118,26 +118,8 @@ export default function Twin() {
                             Hi there! I&apos;m Charan&apos;s (Chiru&apos;s) Digital Twin 👋
                         </h3>
                         <p className="text-sm text-gray-500 mt-1 max-w-md">
-                            Ask me anything about my qualifications, MCA at CMR College, AWS &amp; Cloud skills, Spotify MCP Server, or Ed Donner AI certifications!
+                            Ask me anything about my experience, skills, or projects!
                         </p>
-
-                        <div className="mt-6 flex flex-wrap justify-center gap-2 max-w-lg">
-                            {[
-                                "Tell me about your qualifications and MCA at CMR College",
-                                "What are your AWS, Azure, GCP, Vercel & Terraform cloud skills?",
-                                "What AI & Agentic skills did you gain from Ed Donner's courses?",
-                                "What is your Spotify MCP Server hobby project?",
-                                "What are your favorite games, hobbies, and sports?"
-                            ].map((suggestion, index) => (
-                                <button
-                                    key={index}
-                                    onClick={() => sendMessage(suggestion)}
-                                    className="text-xs bg-white border border-slate-200 hover:border-slate-400 hover:bg-slate-100 text-slate-700 py-2 px-3 rounded-full shadow-sm transition text-left cursor-pointer"
-                                >
-                                    💬 {suggestion}
-                                </button>
-                            ))}
-                        </div>
                     </div>
                 )}
 

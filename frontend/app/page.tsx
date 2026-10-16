@@ -1,5 +1,5 @@
 import Twin from '@/components/twin';
-import { ExternalLink, Award, GraduationCap, FolderGit2, Cloud } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 
 export default function Home() {
   return (
@@ -13,35 +13,6 @@ export default function Home() {
           <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
             Interactive AI Digital Twin representing Charan — exploring Large Language Models, Autonomous Agents, and Production AI.
           </p>
-
-          {/* Highlights / Badges */}
-          <div className="mt-4 flex flex-wrap justify-center gap-2.5">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-blue-50 text-blue-800 border border-blue-200">
-              <GraduationCap className="w-3.5 h-3.5" />
-              BCA Graduate (7.85 CGPA) · Pursuing MCA @ CMR College
-            </span>
-            <a
-              href="https://github.com/Chiru144/Spotify-MCP-Web-MCP-Server"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100 transition"
-            >
-              <FolderGit2 className="w-3.5 h-3.5" />
-              Hobby Project: Spotify-MCP-Web-MCP-Server
-              <ExternalLink className="w-3 h-3" />
-            </a>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-purple-50 text-purple-800 border border-purple-200">
-              <Award className="w-3.5 h-3.5" />
-              Ed Donner Certified: 6 AI Tracks
-            </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-sky-50 text-sky-800 border border-sky-200">
-              <Cloud className="w-3.5 h-3.5" />
-              AWS (SageMaker AI, Bedrock, Serverless) · Azure · GCP · Vercel · Terraform
-            </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-amber-50 text-amber-800 border border-amber-200">
-              🎮 Gamer · 🏏 Cricket &amp; Virat Kohli · 🪙 Rare Coins
-            </span>
-          </div>
         </div>
 
         {/* Chat Application */}
