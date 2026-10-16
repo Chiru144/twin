@@ -25,18 +25,21 @@ export default function Twin() {
         scrollToBottom();
     }, [messages]);
 
-    const sendMessage = async () => {
-        if (!input.trim() || isLoading) return;
+    const sendMessage = async (messageText?: string) => {
+        const textToSend = (messageText !== undefined ? messageText : input).trim();
+        if (!textToSend || isLoading) return;
 
         const userMessage: Message = {
             id: Date.now().toString(),
             role: 'user',
-            content: input,
+            content: textToSend,
             timestamp: new Date(),
         };
 
         setMessages(prev => [...prev, userMessage]);
-        setInput('');
+        if (messageText === undefined) {
+            setInput('');
+        }
         setIsLoading(true);
 
         try {
@@ -46,7 +49,7 @@ export default function Twin() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    message: input,
+                    message: textToSend,
                     session_id: sessionId || undefined,
                 }),
             });
@@ -76,11 +79,13 @@ export default function Twin() {
                 content: 'Sorry, I encountered an error. Please try again.',
                 timestamp: new Date(),
             };
-            setMessages(prev => [...prev, errorMessage]);
+            setMessages(prev => [...prev, assistantMessageError(errorMessage)]);
         } finally {
             setIsLoading(false);
         }
     };
+
+    const assistantMessageError = (errorMessage: Message) => errorMessage;
 
     const handleKeyPress = (e: React.KeyboardEvent) => {
         if (e.key === 'Enter' && !e.shiftKey) {
@@ -95,18 +100,44 @@ export default function Twin() {
             <div className="bg-gradient-to-r from-slate-700 to-slate-800 text-white p-4 rounded-t-lg">
                 <h2 className="text-xl font-semibold flex items-center gap-2">
                     <Bot className="w-6 h-6" />
-                    AI Digital Twin
+                    Charan M (Chiru) — Digital Twin
                 </h2>
-                <p className="text-sm text-slate-300 mt-1">Your AI course companion</p>
+                <p className="text-sm text-slate-300 mt-1">
+                    BCA Graduate · MCA Student @ CMR College · AI &amp; Agentic Developer
+                </p>
             </div>
 
             {/* Messages */}
             <div className="flex-1 overflow-y-auto p-4 space-y-4">
                 {messages.length === 0 && (
-                    <div className="text-center text-gray-500 mt-8">
-                        <Bot className="w-12 h-12 mx-auto mb-3 text-gray-400" />
-                        <p>Hello! I&apos;m your Digital Twin.</p>
-                        <p className="text-sm mt-2">Ask me anything about AI deployment!</p>
+                    <div className="text-center text-gray-600 my-auto py-8 px-4 flex flex-col items-center justify-center h-full">
+                        <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mb-3 shadow-inner">
+                            <Bot className="w-9 h-9 text-slate-700" />
+                        </div>
+                        <h3 className="text-lg font-semibold text-gray-800">
+                            Hi there! I&apos;m Charan&apos;s (Chiru&apos;s) Digital Twin 👋
+                        </h3>
+                        <p className="text-sm text-gray-500 mt-1 max-w-md">
+                            Ask me anything about my qualifications, MCA at CMR College, AWS &amp; Cloud skills, Spotify MCP Server, or Ed Donner AI certifications!
+                        </p>
+
+                        <div className="mt-6 flex flex-wrap justify-center gap-2 max-w-lg">
+                            {[
+                                "Tell me about your qualifications and MCA at CMR College",
+                                "What are your AWS, Azure, GCP, Vercel & Terraform cloud skills?",
+                                "What AI & Agentic skills did you gain from Ed Donner's courses?",
+                                "What is your Spotify MCP Server hobby project?",
+                                "What are your favorite games, hobbies, and sports?"
+                            ].map((suggestion, index) => (
+                                <button
+                                    key={index}
+                                    onClick={() => sendMessage(suggestion)}
+                                    className="text-xs bg-white border border-slate-200 hover:border-slate-400 hover:bg-slate-100 text-slate-700 py-2 px-3 rounded-full shadow-sm transition text-left cursor-pointer"
+                                >
+                                    💬 {suggestion}
+                                </button>
+                            ))}
+                        </div>
                     </div>
                 )}
 
@@ -125,7 +156,7 @@ export default function Twin() {
                         )}
 
                         <div
-                            className={`max-w-[70%] rounded-lg p-3 ${message.role === 'user'
+                            className={`max-w-[75%] rounded-lg p-3 ${message.role === 'user'
                                 ? 'bg-slate-700 text-white'
                                 : 'bg-white border border-gray-200 text-gray-800'
                                 }`}
@@ -177,12 +208,12 @@ export default function Twin() {
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
                         onKeyDown={handleKeyPress}
-                        placeholder="Type your message..."
+                        placeholder="Ask Charan anything about his background, projects, or courses..."
                         className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-600 focus:border-transparent text-gray-800"
                         disabled={isLoading}
                     />
                     <button
-                        onClick={sendMessage}
+                        onClick={() => sendMessage()}
                         disabled={!input.trim() || isLoading}
                         className="px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                     >

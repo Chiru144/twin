@@ -1,22 +1,308 @@
 {
     "full_name": "Charan M",
     "name": "Chiru",
-    "current_role": "Graduate",
-    "location": "Bengaluru",
+    "current_role": "MCA Student & AI Developer (BCA Graduate)",
+    "location": "Bengaluru, Karnataka, India",
     "email": "charangowda946@gmail.com",
+    "github": "https://github.com/Chiru144",
     "linkedin": "https://www.linkedin.com/in/charan-m-3829933ab/",
     "specialties": [
-        "Machine Learning",
-        "AI",
-        "Generative AI",
-        "Automation"
+        "Artificial Intelligence & Generative AI",
+        "Large Language Models (LLMs) & RAG",
+        "Autonomous AI Agents & Agentic Workflows",
+        "Model Context Protocol (MCP) & FastMCP",
+        "Cloud Architecture (AWS, Microsoft Azure, Google Cloud Platform)",
+        "Amazon SageMaker AI & Amazon Bedrock",
+        "AWS Serverless & Cloud Infrastructure (Lambda, API Gateway, CloudFront, S3, IAM, EC2, ECR, Aurora, RDS)",
+        "Infrastructure as Code (Terraform)",
+        "Modern Edge Deployment (Vercel) & Next.js Full-Stack",
+        "LangGraph State Machines & Enterprise Agent Harnesses",
+        "AI Coding Agents (Claude Code, Cursor)",
+        "Voice Agents (ElevenLabs, Twilio) & Workflow Automation (n8n)",
+        "Python, Full-Stack Development & Cybersecurity"
     ],
+    "technical_skills": {
+        "cloud_and_infrastructure": {
+            "aws": [
+                "Amazon SageMaker AI",
+                "Amazon Bedrock",
+                "Amazon CloudFront",
+                "Amazon API Gateway",
+                "AWS Lambda",
+                "Amazon Elastic Container Registry (ECR)",
+                "Amazon S3",
+                "AWS IAM (Identity and Access Management)",
+                "Amazon EC2",
+                "Amazon Aurora",
+                "Amazon RDS"
+            ],
+            "multi_cloud_and_platforms": [
+                "Amazon Web Services (AWS)",
+                "Microsoft Azure",
+                "Google Cloud Platform (GCP)",
+                "Vercel (Edge deployments & serverless hosting)"
+            ],
+            "infrastructure_as_code": [
+                "Terraform (Automated cloud infrastructure provisioning, state management, modular architectures, and serverless stack orchestration)"
+            ]
+        },
+        "ai_and_agentic_engineering": {
+            "agentic_systems_and_mcp": [
+                "Autonomous AI Agents & Multi-Agent Architectures",
+                "Model Context Protocol (MCP) & FastMCP Server Engineering",
+                "Dynamic Tool Registration & Function Calling",
+                "Agentic Workflows & Multi-Agent Collaboration"
+            ],
+            "llm_engineering_and_rag": [
+                "Large Language Models (LLMs)",
+                "Advanced Retrieval-Augmented Generation (RAG) Pipelines",
+                "Fine-Tuning with QLoRA & Parameter-Efficient Fine-Tuning (PEFT)",
+                "Prompt Engineering & Structured Outputs",
+                "Vector Databases (ChromaDB, FAISS) & Semantic Search Embeddings"
+            ],
+            "production_ai_and_architecture": [
+                "Production AI Scaling & Serverless Deployments",
+                "Enterprise Agent Harness Engineering",
+                "LangGraph State Machine Orchestration",
+                "Enterprise AI Guardrails & Safety",
+                "Agent Evaluation Frameworks (Evals, Benchmarks & LLM-as-a-judge)",
+                "Agent Swarms & Production Hardening"
+            ],
+            "coding_agents_and_voice_automation": [
+                "AI Coding Agents (Claude Code, Cursor, Windsurf)",
+                "Test-Driven Agentic Engineering & Spec-Driven Development",
+                "Autonomous Workflow Automation with n8n",
+                "AI Voice Agents (ElevenLabs, Twilio Integration)"
+            ]
+        },
+        "programming_and_databases": {
+            "languages": ["Python", "TypeScript", "JavaScript", "SQL", "HTML5", "CSS3"],
+            "frameworks_and_libraries": ["FastAPI", "Next.js", "React", "Flask", "TailwindCSS"],
+            "databases_and_storage": ["Amazon Aurora", "Amazon RDS", "Amazon S3", "SQLite", "Firebase Storage"]
+        }
+    },
     "years_experience": 1,
     "education": [
         {
-            "degree": "Application in Computer Science",
+            "degree": "Master of Computer Applications (MCA)",
+            "institution": "CMR College",
+            "status": "Currently pursuing",
+            "location": "Bengaluru, Karnataka, India"
+        },
+        {
+            "degree": "Bachelor of Computer Applications (BCA)",
             "institution": "St. Francis College",
-            "year": "2026"
+            "status": "Graduate",
+            "cgpa": "7.85 CGPA",
+            "location": "Bengaluru, Karnataka, India",
+            "coursework": [
+                "Programming Languages",
+                "Software Engineering",
+                "Database Management Systems",
+                "Computer Networks",
+                "Operating Systems",
+                "Web Technologies"
+            ]
+        },
+        {
+            "degree": "Pre-University (PCMC)",
+            "institution": "Krupanidhi Group of Institutions",
+            "status": "Completed (03/2023)",
+            "focus": "Physics, Chemistry, Mathematics, and Computer Science"
         }
-    ]
+    ],
+    "personal_projects": [
+        {
+            "name": "Spotify & TMDB Web MCP Server",
+            "type": "Personal Hobby Project",
+            "github_url": "https://github.com/Chiru144/Spotify-MCP-Web-MCP-Server",
+            "description": "FastMCP application integrating Spotify and TMDB (The Movie Database), powered by 43 registered MCP tools and 7 autonomous agent skills. Bridges cinema and music by dynamically looking up movies, cast, and crew on TMDB to extract soundtracks and generate custom Spotify playlists. Features audio feature vibe sorting (valence, energy, danceability), smart playlist deduplication, a multi-seed vibe engine, and an interactive local web Soundtrack Staging Studio with desktop Tkinter OAuth authentication.",
+            "tech_stack": [
+                "Python",
+                "FastMCP",
+                "Model Context Protocol (MCP)",
+                "FastAPI",
+                "Spotify Web API",
+                "TMDB API",
+                "DuckDuckGo API",
+                "Tkinter"
+            ],
+            "highlights": [
+                "43 FastMCP Tools & 7 Agent Skills",
+                "Cinema Soundtrack & Filmography Discovery pipeline",
+                "Interactive Web-based Soundtrack Curator & Staging Studio",
+                "Acoustic vibe analysis & playlist deduplication"
+            ]
+        },
+        {
+            "name": "AI Digital Twin",
+            "type": "Full-Stack AI Production Project",
+            "description": "Conversational AI Digital Twin representing Charan M, built with persistent conversation memory and deployed to production on AWS using serverless architecture.",
+            "tech_stack": [
+                "Next.js",
+                "FastAPI",
+                "AWS Lambda",
+                "Amazon Bedrock",
+                "Amazon SageMaker AI",
+                "Terraform",
+                "Amazon S3",
+                "Amazon API Gateway",
+                "Amazon CloudFront",
+                "Vercel"
+            ]
+        },
+        {
+            "name": "GhostDrive – Secure Multi-Cloud Cryptographic Storage Platform",
+            "type": "Cloud Security Project",
+            "description": "Architected backend REST APIs using Python Flask and SQLite for encrypted multi-cloud file management with AES encryption, key generation, and error-correcting steganography.",
+            "tech_stack": ["Python", "Flask", "SQLite", "AWS S3", "Firebase"]
+        },
+        {
+            "name": "ScanGuard – Content Inspection & Data Loss Prevention System",
+            "type": "Cybersecurity Project",
+            "description": "Developed proxy filtering services in Flask with automated pattern-matching checks to prevent data leaks, integrated with Amazon S3 using boto3 for secure file auditing.",
+            "tech_stack": ["Python", "Flask", "AWS boto3", "Amazon S3"]
+        }
+    ],
+    "courses_and_certifications": [
+        {
+            "title": "AI Engineer Agentic Track: The Complete Agent & MCP Course",
+            "instructor": "Ed Donner (Edward Donner)",
+            "platform": "Udemy",
+            "type": "Course & Certificate",
+            "status": "Completed with Certificate",
+            "topics": [
+                "AI Agents",
+                "Multi-Agent Architectures",
+                "Model Context Protocol (MCP)",
+                "Agentic Workflows",
+                "Tool Use & Function Calling"
+            ]
+        },
+        {
+            "title": "AI Engineer Core Track: LLM Engineering, RAG, QLoRA, Agents",
+            "instructor": "Ed Donner (Edward Donner)",
+            "platform": "Udemy",
+            "type": "Course & Certificate",
+            "status": "Completed with Certificate",
+            "topics": [
+                "Large Language Models (LLMs)",
+                "Retrieval-Augmented Generation (RAG)",
+                "Fine-tuning with QLoRA",
+                "Prompt Engineering & Vector Databases"
+            ]
+        },
+        {
+            "title": "AI Engineer Production Track: Deploy LLMs & Agents at Scale",
+            "instructor": "Ed Donner (Edward Donner)",
+            "platform": "Udemy",
+            "type": "Course & Certificate",
+            "status": "Completed with Certificate",
+            "topics": [
+                "AI in Production",
+                "Cloud Deployment (AWS Lambda, S3, API Gateway, CloudFront)",
+                "Infrastructure as Code (Terraform)",
+                "Amazon Bedrock & Serverless AI",
+                "CI/CD and Next.js / FastAPI integration"
+            ]
+        },
+        {
+            "title": "AI Coder: Vibe Coder to Agentic Engineer",
+            "instructor": "Ed Donner (Edward Donner)",
+            "platform": "Udemy",
+            "type": "Course & Certificate",
+            "status": "Completed with Certificate",
+            "topics": [
+                "AI Coding Agents",
+                "Claude Code",
+                "Cursor & Windsurf IDE workflows",
+                "Autonomous Test-Driven Development",
+                "Vibe Coding to Production Architecture"
+            ]
+        },
+        {
+            "title": "AI Builder: Create Agents, Voice Agents & Automations in n8n",
+            "instructor": "Ed Donner (Edward Donner)",
+            "platform": "Udemy",
+            "type": "Course & Certificate",
+            "status": "Completed with Certificate",
+            "topics": [
+                "Workflow Automations with n8n",
+                "Voice Agents (ElevenLabs & Twilio)",
+                "Multi-Tool Webhook Integrations",
+                "Autonomous Customer Support & CRM Agents"
+            ]
+        },
+        {
+            "title": "AI FDE: The Forward Deployed Engineer & Agentic AI Architect",
+            "instructor": "Ed Donner (Edward Donner)",
+            "platform": "Udemy",
+            "type": "Course & Certificate",
+            "status": "Completed with Certificate",
+            "topics": [
+                "Forward Deployed Engineer (FDE) Methodology",
+                "Agent Harness Engineering",
+                "LangGraph & State Machine Orchestration",
+                "Enterprise Evals & Guardrails",
+                "Agent Swarms & Production Hardening"
+            ]
+        },
+        {
+            "title": "Getting Started with Artificial Intelligence",
+            "issuer": "IBM SkillsBuild",
+            "type": "Certificate (Verified Credly Badge, Feb 2026)",
+            "status": "Certified",
+            "topics": ["Artificial Intelligence Fundamentals", "Machine Learning Basics"]
+        },
+        {
+            "title": "Value Added Course on Ethical Hacking",
+            "type": "Course & Training",
+            "status": "Completed",
+            "topics": ["Network Security", "Penetration Testing Fundamentals", "Vulnerability Assessment"]
+        },
+        {
+            "title": "Cybersecurity Beginners Certification",
+            "type": "Certification",
+            "status": "Certified",
+            "topics": ["Information Security Components", "Defensive Security Measures", "Threat Detection"]
+        },
+        {
+            "title": "AWS Cloud Computing Workshop",
+            "type": "Workshop & Training",
+            "status": "Completed",
+            "topics": ["AWS Architecture", "Amazon S3", "Compute", "IAM Security"]
+        }
+    ],
+    "hobbies_and_interests": {
+        "favorite_hobby": "Listening to songs",
+        "hobbies": [
+            "Listening to songs (top favorite)",
+            "Rare coin collections",
+            "Drawing and painting",
+            "Gaming"
+        ],
+        "gaming": {
+            "favorite_games": [
+                "Uncharted",
+                "GTA (Grand Theft Auto)",
+                "Assassin's Creed",
+                "Minecraft",
+                "Pokemon"
+            ]
+        },
+        "sports": {
+            "favorite_sport": "Cricket",
+            "favorite_player": "Virat Kohli"
+        },
+        "favorite_colors": [
+            "Bright Red",
+            "Orange (like saffron)",
+            "White",
+            "Black"
+        ],
+        "favorite_food": "Biryani",
+        "dislikes": [
+            "Sweets with too much sweet / overly sugary desserts"
+        ]
+    }
 }

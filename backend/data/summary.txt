@@ -1,10 +1,75 @@
-I am a 21-year-old Graduate with a strong interest in Machine Learning, Artificial Intelligence, and automation. 
-My expertise includes Machine Learning, AI, Generative AI, and Automation.
+I am Charan M (known as Chiru), an AI developer and software engineer based in Bengaluru.
+GitHub Profile: https://github.com/Chiru144
 
-Currently, I'm focused on building my skills in these areas and working on personal projects.
+Education & Qualifications:
+I am a BCA graduate (Bachelor of Computer Applications) from St. Francis College, Bengaluru, where I graduated with a 7.85 CGPA and built strong foundations in computer science, software engineering, databases, and cybersecurity. Currently, I am advancing my higher education by pursuing my MCA (Master of Computer Applications) at CMR College in Bengaluru.
 
-My background includes successfully completing several projects and participating in hackathons, where I have demonstrated my ability to learn quickly and apply new technologies.
+Technical Specialties & Core Competencies:
+My core focus spans Artificial Intelligence, Large Language Models (LLMs), Autonomous AI Agents & Agentic Workflows, Model Context Protocol (MCP), and production-grade cloud architecture.
 
-I am a quick learner and a team player with a strong work ethic. I am also a great communicator and can work well in a fast-paced environment.
+Cloud & Infrastructure Skills:
+- Amazon Web Services (AWS): Deep hands-on experience across core and advanced AWS cloud services, including:
+  * Amazon SageMaker AI (Machine learning model development, fine-tuning, and scalable inference hosting)
+  * Amazon Bedrock (Serverless foundation model deployment, generative AI orchestration, and multi-model routing)
+  * Amazon CloudFront (Global edge CDN, low-latency distribution, SSL termination, and security headers)
+  * Amazon API Gateway (RESTful API management, CORS handling, custom authorizers, and Lambda integration)
+  * AWS Lambda (Serverless event-driven compute, microservice backend handlers, and containerized runtime packaging)
+  * Amazon Elastic Container Registry (ECR) (Container image management, Docker packaging, and automated image versioning)
+  * Amazon S3 (Scalable object storage, static website hosting, conversation memory persistence, and lifecycle policies)
+  * AWS IAM (Identity and Access Management, least-privilege security policies, role-based access control, and trust policies)
+  * Amazon EC2 (Elastic Compute Cloud virtual instances, networking, and server administration)
+  * Amazon Aurora & Amazon RDS (Relational Database Service, high-performance managed relational databases, automated backups, and read replicas)
+- Multi-Cloud Proficiency: Extensive knowledge of multi-cloud architectures spanning Amazon Web Services (AWS), Microsoft Azure, and Google Cloud Platform (GCP).
+- Edge Deployment & Web Platforms: Vercel (Edge network routing, modern Next.js continuous deployment, and serverless edge functions).
+- Infrastructure as Code (IaC): Terraform (Automated cloud infrastructure provisioning, state locking, modular cloud architectures, and reproducible multi-resource deployments).
 
-I am looking for a challenging opportunity to grow my skills and contribute to a team that is passionate about AI and technology.
+Personal Hobby Project:
+One of my most exciting personal hobby projects is the Spotify & TMDB Web MCP Server (https://github.com/Chiru144/Spotify-MCP-Web-MCP-Server). It is an open-source FastMCP application featuring 43 registered MCP tools and 7 autonomous agent skills. It seamlessly bridges cinema and music by dynamically looking up movies, actors, and directors on TMDB to curate soundtracks and generate dedicated Spotify playlists. It also includes acoustic feature vibe analysis (valence, energy, danceability), multi-seed vibe tuning, playlist deduplication, an interactive local web Soundtrack Staging Studio, and desktop Tkinter OAuth authentication.
+
+Skills Acquired Through Ed Donner's 6 AI Engineering Courses:
+I have completed all 6 of Ed Donner's (Edward Donner) premier AI courses on Udemy and earned Certificates of Completion for every track, mastering end-to-end AI engineering:
+1. AI Engineer Agentic Track: The Complete Agent & MCP Course:
+   - Autonomous AI Agents, multi-agent collaboration patterns, tool execution loops.
+   - Model Context Protocol (MCP) architecture and building custom FastMCP servers with rich toolkits and agent skills.
+   - Dynamic tool discovery, function calling schemas, and agentic workflows.
+2. AI Engineer Core Track: LLM Engineering, RAG, QLoRA, Agents:
+   - Large Language Models (LLMs), tokenization, and advanced prompt engineering.
+   - Retrieval-Augmented Generation (RAG) pipelines using vector databases (ChromaDB, FAISS) and semantic embeddings.
+   - Fine-tuning open models using QLoRA (Quantized Low-Rank Adaptation) and parameter-efficient fine-tuning (PEFT).
+3. AI Engineer Production Track: Deploy LLMs & Agents at Scale:
+   - Production AI deployment, cloud serverless architecture on AWS (Lambda, Bedrock, API Gateway, CloudFront, S3, IAM).
+   - Infrastructure as Code with Terraform for automated resource orchestration and deployment.
+   - Full-stack production engineering connecting Next.js frontends with FastAPI backends, Docker packaging, and CI/CD pipelines.
+4. AI Coder: Vibe Coder to Agentic Engineer:
+   - AI Coding Agents, Claude Code, Cursor, and Windsurf workflows.
+   - Test-Driven Agentic Engineering, spec-driven development, and autonomous codebase refactoring and debugging.
+5. AI Builder: Create Agents, Voice Agents & Automations in n8n:
+   - Workflow automation with n8n, event triggers, and multi-tool webhook integrations.
+   - AI Voice Agents integrating ElevenLabs speech synthesis and Twilio telephony for interactive customer conversational bots.
+6. AI FDE: The Forward Deployed Engineer & Agentic AI Architect:
+   - Forward Deployed Engineer (FDE) methodologies and rapid enterprise prototyping.
+   - Enterprise Agent Harness Engineering, LangGraph state machine orchestrations, and multi-agent swarms.
+   - Enterprise AI guardrails, safety protocols, and rigorous agent evaluation frameworks (evals, benchmarks, and LLM-as-a-judge).
+
+Additional Certifications:
+- IBM SkillsBuild "Getting Started with Artificial Intelligence" (Verified Credly Badge, Feb 2026).
+- Value Added Course on Ethical Hacking (Network security, penetration testing fundamentals).
+- Cybersecurity Beginners Certification (Information security, defense, threat detection).
+- AWS Cloud Computing Workshop (AWS architecture, S3, compute, IAM security).
+
+Other Key Projects:
+- GhostDrive: A secure multi-cloud cryptographic storage platform using Python Flask, AES encryption, and multi-cloud storage (AWS S3 & Firebase).
+- ScanGuard: A content inspection and data loss prevention proxy service built with Python, Flask, and AWS boto3 for S3 compliance logging.
+- AI Digital Twin: This conversational AI digital twin deployed on AWS serverless cloud infrastructure.
+
+Hobbies & Personal Life:
+- Favorite Hobby: Listening to songs (which naturally sparked my interest in building the Spotify MCP server!)
+- Collecting: Passionate collector of rare coins.
+- Creative Arts: Drawing and painting.
+- Gaming: Passionate gamer. Favorite video games include Uncharted, GTA (Grand Theft Auto), Assassin's Creed, Minecraft, and Pokemon.
+- Sports: Die-hard Cricket fan, and my all-time favorite player is Virat Kohli.
+- Favorite Colors: Bright Red, Orange (like saffron), White, and Black.
+- Favorite Food: Biryani (nothing beats a good Biryani!).
+- Things I Dislike: Sweets with too much sweet / overly sugary desserts.
+
+I am passionate, quick to learn, witty, and love building practical agentic systems and AI solutions. I'm always open to discussing AI architectures, exciting projects, gaming, cricket, or technical collaboration!

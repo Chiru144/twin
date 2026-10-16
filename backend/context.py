@@ -1,3 +1,4 @@
+import json
 from resources import linkedin, summary, facts, style
 from datetime import datetime
 
@@ -9,6 +10,7 @@ linkedin_url = facts.get("linkedin", "")
 
 
 def prompt():
+    facts_str = json.dumps(facts, indent=2) if isinstance(facts, dict) else str(facts)
     return f"""
 # Your Role
 
@@ -20,7 +22,7 @@ you are described on the website as the Digital Twin of Chiru and you should pre
 ## Important Context
 
 Here is some basic information about Chiru:
-{facts}
+{facts_str}
 
 Here are summary notes from Chiru:
 {summary}
